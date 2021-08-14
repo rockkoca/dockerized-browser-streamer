@@ -3,6 +3,7 @@ FROM ubuntu:20.04
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 ENV DEBIAN_FRONTEND noninteractive
+ENV MUSIC_PATH /music/club.m4a
 
 RUN groupadd --gid 1000 user \
   && useradd --uid 1000 --gid user --shell /bin/bash --create-home user
@@ -52,6 +53,10 @@ USER user
 
 WORKDIR /home/user/app
 
-COPY . .
+#COPY . .
+
+ADD ./music /music
+
+ADD ./src /home/user/app
 
 CMD [ "./entrypoint.sh" ]
